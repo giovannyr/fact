@@ -22,13 +22,6 @@ class Database {
         }
         return $connection;
     }
-
-//    protected function DML($sql, $args) {
-//        $connection = $this->getConnection();
-//        $stmt = $connection->prepare($sql);
-//        $stmt->execute($args);        
-//        return $stmt;
-//    }
     
     protected function set($sql, $args){
         $connection = $this->getConnection();        
@@ -48,7 +41,7 @@ class Database {
             }
             $connection->commit();
         } catch (PDOException $ex) {
-            die("No se pudo conectar: " . $ex->getMessage());
+            die(" " . $ex->getMessage());
         }
         return $fetch;                
     }
