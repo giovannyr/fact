@@ -1,0 +1,30 @@
+#modal_alerts .modal-header{
+    padding: 2px 5px;
+    border: none;
+}
+
+.alert{
+    margin-bottom: 0;
+    border-radius: 0;     
+}
+
+.alert-yellow, .mh-yellow{
+    background-color: #FFFF01;   
+}
+
+.alert-red, .mh-red{
+    background-color: #E41408;
+}
+
+.alert-green, .mh-green{
+    background-color: #5CB85C;
+}
+
+body div#modal_alerts div.modal-dialog div.modal-content div#msg_alert{
+    color: #FFF !important;
+    font-size: 2em;                
+    width: 100%;  
+    height: 100%;
+    text-shadow: 2px 2px 2px #000;
+    white-space: normal;
+}

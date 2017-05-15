@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../resources/font-awesome/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../resources/validetta/validetta.css"/>
+<link rel="stylesheet" href="../resources/alerts/css/style_alerts.css"/>
+<link rel="stylesheet" href="../resources/css/style.css"/>
+<script type="text/javascript" src="../resources/js/jquery.js"></script>
+<script type="text/javascript" src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/validetta/validetta.js"></script>
+<script type="text/javascript" src="../resources/validetta/localization/validettaLang-es-ES.js"></script>
+<script type="text/javascript" src="../resources/js/util.js"></script>
+<script type="text/javascript" src="../resources/alerts/js/alerts.js"></script>
