@@ -14,7 +14,7 @@ class Compra extends Database{
         $args = array($codigo);
         $result = $this->set($sql, $args);
         if($this->getRow_count() == 1){
-            $row = $result;
+            $row = $result[0];
             $this->response['correcto'] = TRUE;
             $this->response['data'] = $row;
             $this->response['msg'] = "";

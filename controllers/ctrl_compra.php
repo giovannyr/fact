@@ -16,7 +16,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             require '../models/Producto.php';
             $prd = new Producto();
             $response = $prd->consultar_producto($data);
+            break;        
+        case 'listar_productos':
+            require '../models/Producto.php';
+            $prd = new Producto();
+            $response = $prd->listar_productos();
             break;
+        
     }
     die(json_encode($response));
 }

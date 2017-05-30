@@ -55,6 +55,30 @@ function validar_cliente(){
 }
 
 
+function listar_productos(){
+    $.ajax({
+        url: '../controllers/ctrl_compra.php',
+        type: 'POST',
+        data: {"accion": "listar_productos"},        
+        success: function (response) {
+            console.log(response);
+            response = JSON.parse(response);
+            if (response['correcto']) {
+                mostrar_productos(response['data']);                                
+            } else {
+                alerta_error(response['msg']);
+            }
+        }
+    });
+}
+
+
+function mostrar_productos(data){
+    var temp = _.template($('#tmp_ofertas_productos').html());
+    $('#ofertas_productos').html(temp({'data': data}));
+}
+
+
 function consultar_datos_producto(cod_oferta) {
     $.ajax({
         url: '../controllers/ctrl_compra.php',
@@ -300,3 +324,6 @@ $(document).ready(function ()
         consultar_datos_cliente(cod_cliente);
     }, 200);
 }); 
+
+
+listar_productos();

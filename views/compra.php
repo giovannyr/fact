@@ -1,6 +1,5 @@
 <?php
 date_default_timezone_set('America/Bogota');
-
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +72,10 @@ date_default_timezone_set('America/Bogota');
                     </div>
 
                     <div class="row">
-                        <form id="form_producto">
+                        <div class="col-lg-4 col-md-4">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Ofertas</button>
+                        </div>
+                        <!--<form id="form_producto">
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label for="cod_oferta">Código Oferta</label>
@@ -110,7 +112,7 @@ date_default_timezone_set('America/Bogota');
                                     Agregar
                                 </button>
                             </div>
-                        </form>
+                        </form>-->
                     </div>
                     <br />
                     <div class="row">
@@ -127,7 +129,7 @@ date_default_timezone_set('America/Bogota');
                                     </tr>
                                 </thead>
                                 <tbody id="lista_productos">
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -145,22 +147,106 @@ date_default_timezone_set('America/Bogota');
                     </div>
                 </div>
             </div>
+        </div>        
+
+        <div class="modal bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Ofertas</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+<!--                                <form id="form_producto">
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="cod_oferta">Código Oferta</label>
+                                            <input type="text" class="form-control input-sm" name="cod_oferta" id="cod_oferta" placeholder="Oferta">
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label for="desc_oferta">Descripción</label>
+                                            <input type="text" class="form-control input-sm" name="desc_oferta" id="desc_oferta" disabled="true">
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="cantidad">Cantidad</label>
+                                            <input type="number" class="form-control input-sm" name="cantidad" id="cantidad" value="1" placeholder="Cantidad" min="1">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="valor_unitario">V. Unitario</label>
+                                            <input type="text" class="form-control input-sm" name="valor_unitario" id="valor_unitario" min="1" disabled="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label for="valor_total">V. Total</label>
+                                            <input type="text" class="form-control input-sm" name="valor_total" id="valor_total" min="1" disabled="true">
+                                        </div>
+                                    </div>                            
+                                    <div class="col-lg-12">
+                                        <button type="button" class="btn btn-primary btn-sm" id="btn_add_product">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            Agregar
+                                        </button>
+                                    </div>
+                                </form>-->
+                                <table class="table table-striped table-hover table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Descripcion</th>
+                                            <th>V. Unitario</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ofertas_productos"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                        
+                    </div>
+                </div>
+            </div>
         </div>
+
         <script type="text/javascript" src="../resources/js/ac.js"></script>
         <script type="text/javascript" src="../resources/js/us.js"></script>
         <script type="text/javascript" src="../resources/js/app/compra.js"></script>
         <script type="text/template" id="tmp_productos">
             <% _.each(data, function(item){ %>                
-                <tr>
-                    <td><%= item.codigo_producto %></td>
-                    <td><%= item.descripcion_producto %></td>
-                    <td><%= item.cantidad %></td>
-                    <td><%= accounting.formatMoney(item.valor) %></td>
-                    <td><%= accounting.formatMoney(item.total) %></td>
-                    <td>                        
-                        <buton data-role="delete_item" data-id="<%= item.id_producto %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></buton>
-                    </td>
-                </tr>
+            <tr>
+                <td><%= item.codigo_producto %></td>
+                <td><%= item.descripcion_producto %></td>
+                <td><%= item.cantidad %></td>
+                <td><%= accounting.formatMoney(item.valor) %></td>
+                <td><%= accounting.formatMoney(item.total) %></td>
+                <td>                        
+                    <buton data-role="delete_item" data-id="<%= item.id_producto %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></buton>
+                </td>
+            </tr>
+            <% }); %>
+        </script>
+        
+        <script type="text/template" id="tmp_ofertas_productos">
+            <% _.each(data, function(item){ %> 
+                        <% console.log(item) %>
+            <tr>
+                <td><%= item.cod %></td>
+                <td><%= item.descp %></td>
+                <td><%= item.vunit %></td>            
+                <td>                        
+                    <buton data-role="" data-id="<%= item.id_producto %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></buton>
+                </td>
+            </tr>
             <% }); %>
         </script>
     </body>

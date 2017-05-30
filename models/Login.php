@@ -12,12 +12,13 @@ class Login extends Database{
     function consultar($user, $pass){
         $sql = "CALL sp_login(?, ?)";
         $args = array($user, md5($pass));
-        $result = $this->set($sql, $args);        
+        $result = $this->set($sql, $args);                
         if($this->getRow_count() == 1){
-            $row = $result;
+            $row = $result[0];
             session_start();
             $_SESSION['nombre_usuario'] = $row["nombre"];
             $_SESSION['perfil'] = $row['perfil'];
+            $_SESSION['id_ofertante'] = intval($row['id_ofertante']);
             $_SESSION['sesion_valida'] = TRUE;
             $this->response['link'] = 'compra.php';
             $this->response['msg'] = '';            

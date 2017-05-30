@@ -30,8 +30,8 @@ class Database {
             $connection->beginTransaction();
             $this->success = $stmt->execute($args);            
             if($stmt){
-                #$fetch = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                $fetch = $stmt->fetch(PDO::FETCH_ASSOC);
+                $fetch = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                #$fetch = $stmt->fetch(PDO::FETCH_ASSOC);
                 $this->last_id = $connection->lastInsertId();                
                 $this->row_count = $stmt->rowCount();                
             }else{

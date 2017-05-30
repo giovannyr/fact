@@ -1,3 +1,7 @@
+#modal_alerts{
+    z-index: 50000;
+}
+
 #modal_alerts .modal-header{
     padding: 2px 5px;
     border: none;
