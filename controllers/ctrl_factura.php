@@ -21,7 +21,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             $total_compra = calcular_total_compra($detalles); 
             $cupo_disp = floatval($request->data->cliente->cupo_disponible) - $total_compra;
             $fac = new Factura();
-            $fac->guardar_factura($documento, $detalles, $cupo_disp);            
+            $fac->set_data($documento, $detalles, $cupo_disp); 
+            $fac->guardar();
             
             #echo ($documento);
             #var_dump($detalles);            

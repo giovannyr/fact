@@ -130,12 +130,47 @@ function validar_producto() {
 }
 
 
+function validar_duplicados(){
+    var cod = row_producto['codigo_producto'];
+    if(typeof _.findWhere(detalle_productos, {'codigo_producto' : cod}) === "undefined"){
+        return true;
+    }else{
+        borrar_producto();
+        return false;
+    }
+}
+
+
+function total_pedido(){
+    var total_pedido;
+    if(_.size(detalle_productos) > 0){
+        total_pedido = 0;
+        _.each(detalle_productos, function(prod){
+            total_pedido += prod.total;
+        });
+    }else{
+        total_pedido = row_producto['total'];
+    }
+    return total_pedido;
+}
+
+
+function validar_cupo(){    
+    var cdisp = parseFloat(row_cliente['cupo_disponible']);
+    if(total_pedido() <= cdisp){
+        return true;
+    }else{
+        borrar_producto();
+        return false;
+    }    
+}
+
+
 function agregar_producto() { 
     // TODO 
-    // validar, para que no se puedan ingresar elementos duplicados
     // validar el cupo disponible con el valor de la compra para permitir la transaccion
     detalle_productos.push(row_producto);
-    row_producto = {};
+    borrar_producto();
     listar_productos_agregados();    
     borrar_datos_producto();  // LIMPIA EL FORMULARIO DESPUES DE AGREGAR EL PRODUCTO
     $('#cod_oferta').focus();
@@ -143,9 +178,6 @@ function agregar_producto() {
 }
 
 
-function validar_duplicados(){
-    
-}
 
 
 function listar_productos_agregados(){    
@@ -181,6 +213,11 @@ function registrar_compra_cliente(){
             console.log(response);
         }
     });
+}
+
+
+function borrar_producto(){
+    row_producto = {};
 }
 
 
@@ -225,11 +262,27 @@ $('#cantidad').on('change', function () {
 
 
 $('#btn_add_product').on('click', function () {
-    if(validar_producto()){
-        agregar_producto();
+    if(typeof row_cliente['cupo_disponible'] !== 'undefined'){
+        if(validar_producto()){        
+            if(validar_duplicados()){
+                if(validar_cupo()){
+                    agregar_producto();                            
+                }else{
+                    $('#form_producto').trigger('reset');
+                    alerta_error('El cupo es insuficiente');
+                }
+            }else{
+                $('#form_producto').trigger('reset');
+                alerta_error('El producto ya esta agregado en la lista');
+            }
+        }else{
+            alerta_error('No se puede agregar el producto.');
+            $('#cod_oferta').focus();
+        }
     }else{
-        alerta_error('No se pudo agregar el producto, intentelo nuevamente.');
-        $('#cod_oferta').focus();
+        borrar_producto();
+        $('#form_producto').trigger('reset');
+        alerta_error('Primero seleccionar un cliente');
     }
 });
 

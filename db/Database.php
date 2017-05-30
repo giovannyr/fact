@@ -37,6 +37,7 @@ class Database {
             }else{
                 $connection->rollBack();
                 $this->last_id = -1;
+                $this->row_count = 0;
                 return false;
             }
             $connection->commit();
