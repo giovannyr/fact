@@ -138,9 +138,9 @@ date_default_timezone_set('America/Bogota');
                     <div class="row">
                         <div class="col-lg-8">
                             <button id="btn_registrar_compra" class="btn btn-success">Registrar Compra</button>
+<!--                            <button id="" class="btn btn-default">NULL</button>
                             <button id="" class="btn btn-default">NULL</button>
-                            <button id="" class="btn btn-default">NULL</button>
-                            <button id="" class="btn btn-default">NULL</button>
+                            <button id="" class="btn btn-default">NULL</button>-->
                         </div>
                         <div class="col-lg-4">
                         </div>
@@ -197,12 +197,14 @@ date_default_timezone_set('America/Bogota');
                                         </button>
                                     </div>
                                 </form>-->
-                                <table class="table table-striped table-hover table-condensed table-bordered">
+                                <table class="table table-striped table-condensed table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Codigo</th>
                                             <th>Descripcion</th>
+                                            <th>Cantidad</th>
                                             <th>V. Unitario</th>
+                                            <!--<th>V. Total</th>-->
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -230,7 +232,7 @@ date_default_timezone_set('America/Bogota');
                 <td><%= accounting.formatMoney(item.valor) %></td>
                 <td><%= accounting.formatMoney(item.total) %></td>
                 <td>                        
-                    <buton data-role="delete_item" data-id="<%= item.id_producto %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></buton>
+                    <button data-role="delete_item" data-id="<%= item.id_producto %>" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
                 </td>
             </tr>
             <% }); %>
@@ -238,13 +240,17 @@ date_default_timezone_set('America/Bogota');
         
         <script type="text/template" id="tmp_ofertas_productos">
             <% _.each(data, function(item){ %> 
-                        <% console.log(item) %>
+            <% console.log(item) %>
             <tr>
-                <td><%= item.cod %></td>
-                <td><%= item.descp %></td>
-                <td><%= item.vunit %></td>            
+                <td><%= item.codigo_producto %></td>
+                <td><%= item.descripcion_producto %></td>
+                <td>
+                     <input type="number" class="form-control input-sm" data-name="cant" data-id="<%= item.id_producto %>" value="1" placeholder="Cantidad" min="1">       
+                </td>
+                <td><%= accounting.formatMoney(item.valor) %></td>            
+                <!--<td><%= accounting.formatMoney(item.total) %></td>-->            
                 <td>                        
-                    <buton data-role="" data-id="<%= item.id_producto %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></buton>
+                    <button data-role="add" data-id="<%= item.id_producto %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button>
                 </td>
             </tr>
             <% }); %>

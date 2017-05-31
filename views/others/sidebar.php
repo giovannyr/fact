@@ -6,7 +6,7 @@
             </a>
         </li>-->
         <li>
-            <a href="#">
+            <a href="compra.php">
                 <i class="fa fa-credit-card fa-2x" aria-hidden="true"></i>&nbsp;
                 Registrar Compra
             </a>
