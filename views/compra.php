@@ -240,7 +240,7 @@ date_default_timezone_set('America/Bogota');
         
         <script type="text/template" id="tmp_ofertas_productos">
             <% _.each(data, function(item){ %> 
-            <% console.log(item) %>
+            <% //console.log(item) %>
             <tr>
                 <td><%= item.codigo_producto %></td>
                 <td><%= item.descripcion_producto %></td>
@@ -254,6 +254,7 @@ date_default_timezone_set('America/Bogota');
                 </td>
             </tr>
             <% }); %>
-        </script>
+        </script>       
+        
     </body>
 </html>  

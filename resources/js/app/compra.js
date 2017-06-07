@@ -16,6 +16,7 @@ function consultar_datos_cliente(cod_cliente) {
     }).success(function (response) {
         $("#tarjeta").attr("disabled", false);
         response = JSON.parse(response);
+        console.log(JSON.stringify(response['data']));
         if (response['correcto']) {
             row_cliente = response['data'];
             autocompletar_cliente(row_cliente);
@@ -63,7 +64,7 @@ function listar_productos(){
         type: 'POST',
         data: {"accion": "listar_productos"},        
         success: function (response) {
-            console.log(response);
+            //console.log(response);
             response = JSON.parse(response);
             if (response['correcto']) {                                                                
                 lista_productos = response['data'];
@@ -194,7 +195,7 @@ function calcular_total_producto(valor, cantidad) {
 
 
 function validar_producto() {
-    console.log(row_producto, " ", typeof row_producto, " ", row_producto['id_producto']);
+    //console.log(row_producto, " ", typeof row_producto, " ", row_producto['id_producto']);
     var valido = true; 
     if (row_producto['id_producto'] === undefined || row_producto['id_producto'] === "") {
         valido = false;
@@ -264,6 +265,7 @@ function agregar_producto() {
     borrar_datos_producto();  // LIMPIA EL FORMULARIO DESPUES DE AGREGAR EL PRODUCTO
     $('#cod_oferta').focus();
     flag_product = false;
+    console.log(JSON.stringify(detalle_productos));
 }
 
 
@@ -300,6 +302,12 @@ function registrar_compra_cliente(){
         },
         success: function (response) {
             console.log(response);
+            response = JSON.parse(response);
+            if(response['valido']){
+                window.open("../../pdf/index.html");
+            }else{
+                alerta_error('No fue posible registrar la compra');
+            }
         }
     });
 }

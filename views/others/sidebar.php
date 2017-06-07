@@ -12,9 +12,9 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="informe.php">
                 <i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i>&nbsp;
-                Generar Informe
+                Informe
             </a>
         </li>
     </ul>
