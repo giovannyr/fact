@@ -17,6 +17,7 @@ class Factura extends Database{
         $this->response = array();
         $this->id_fact = NULL;
         $this->documento = "";
+        $this->municipio = "";
         $this->detalles = NULL;
         $this->cupo_disponible = NULL;
         $this->factura_valida = FALSE;
@@ -24,8 +25,9 @@ class Factura extends Database{
         $this->cupo_valido = FALSE;
     }
     
-    public function set_data($documento, $detalles, $cupo_disp){
+    public function set_data($documento, $municipio, $detalles, $cupo_disp){
         $this->documento = $documento;
+        $this->municipio = $municipio;
         $this->detalles = $detalles;
         $this->cupo_disponible = $cupo_disp;               
     } 
@@ -50,8 +52,8 @@ class Factura extends Database{
     }
     
     public function guardar_factura(){        
-        $sql = "INSERT INTO FACTURA (doc_cliente,fecha,hora,usuario) VALUES (?,CURDATE(),CURTIME(),?)";
-        $args = array($this->documento, $_SESSION['nombre_usuario']);
+        $sql = "INSERT INTO FACTURA (doc_cliente,fecha,hora,municipio_despacho,usuario) VALUES (?,CURDATE(),CURTIME(),?,?)";
+        $args = array($this->documento, $this->municipio, $_SESSION['nombre_usuario']);
         $this->set($sql, $args);
         if($this->getRow_count() == 1){
             $this->factura_valida = TRUE;

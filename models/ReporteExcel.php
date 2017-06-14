@@ -21,21 +21,22 @@ class ReporteExcel extends Database {
                 ->setCellValue('A1', 'INFORME')
                 ->setCellValue('A3', 'FECHA')
                 ->setCellValue('B3', 'CONSECUTIVO')
-                ->setCellValue('C3', 'DOCUMENTO CLIENTE')
+                ->setCellValue('C3', 'CODIGO CLIENTE')
                 ->setCellValue('D3', 'NOMBRE CLIENTE')
                 ->setCellValue('E3', 'ESTABLECIMIENTO')
-                ->setCellValue('F3', 'CODIGO COMPRAS')
-                ->setCellValue('G3', 'CODIGO OFERTA')
-                ->setCellValue('H3', 'OFERTA')
-                ->setCellValue('I3', 'VAL. UNITARIO')
-                ->setCellValue('J3', 'CANTIDAD')
-                ->setCellValue('K3', 'TOTAL COMPRA')
-                ->setCellValue('L3', 'STAND')
-                ->setCellValue('M3', 'TOTAL COMPRAS CLIENTE');
+                ->setCellValue('F3', 'ESTABLECIMIENTO')
+                ->setCellValue('G3', 'CODIGO COMPRAS')
+                ->setCellValue('H3', 'CODIGO OFERTA')
+                ->setCellValue('I3', 'OFERTA')
+                ->setCellValue('J3', 'VAL. UNITARIO')
+                ->setCellValue('K3', 'CANTIDAD')
+                ->setCellValue('L3', 'TOTAL COMPRA')
+                ->setCellValue('M3', 'STAND')
+                ->setCellValue('N3', 'TOTAL COMPRAS CLIENTE');
 
-        $sql = "select fac.fecha as fecha_compra, if(fac.id < 10,concat('00',fac.id),if(fac.id<100,concat('0',fac.id),fac.id)) as numero_factura, rg.Doc_id as documento, concat(rg.Nombre,' ',rg.Seg_nombre,' ',rg.Apellido,' ',rg.Seg_apellido) as nombre_cliente, rg.Empresa as establecimiento, rg.codigo_barras as cod_compras, prd.codigo as cod_producto, prd.descripcion as producto, prd.valor_unitario as val_unitario, df.cantidad, df.precio as total, ofer.razon as stand 
-                from registro as rg, factura as fac, detalle_factura as df, producto as prd, ofertante as ofer 
-                where binary rg.Estado = 'REGISTRADO' and binary rg.codigo_barras <> '' and rg.Doc_id = fac.doc_cliente and fac.id = df.id_factura and df.id_producto = prd.id and prd.id_ofertante = ofer.id 
+        $sql = "select fac.fecha as fecha_compra, if(fac.id < 10,concat('00',fac.id),if(fac.id<100,concat('0',fac.id),fac.id)) as numero_factura, rg.Doc_id as documento, concat(rg.Nombre,' ',rg.Seg_nombre,' ',rg.Apellido,' ',rg.Seg_apellido) as nombre_cliente, rg.Empresa as establecimiento, subc.municipio, rg.codigo_barras as cod_compras, prd.codigo as cod_producto, prd.descripcion as producto, prd.valor_unitario as val_unitario, df.cantidad, df.precio as total, ofer.razon as stand 
+                from registro as rg, factura as fac, detalle_factura as df, producto as prd, ofertante as ofer, subcodigos as subc 
+                where binary rg.Estado = 'REGISTRADO' and binary rg.codigo_barras <> '' and rg.Doc_id = fac.doc_cliente and fac.id = df.id_factura and df.id_producto = prd.id and prd.id_ofertante = ofer.id and subc.subcodigo = fac.municipio_despacho
                 order by nombre_cliente";
         $data = $this->set($sql, array());
 
@@ -50,18 +51,19 @@ class ReporteExcel extends Database {
                 
                 $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValue('A' . ($key + 4), $data[$i]['fecha_compra'])
-                    ->setCellValue('B' . ($key + 4), $data[$i]['numero_factura'])
+                    ->setCellValue('B' . ($key + 4), "No. ".$data[$i]['numero_factura'])
                     ->setCellValue('C' . ($key + 4), $data[$i]['documento'])
                     ->setCellValue('D' . ($key + 4), $data[$i]['nombre_cliente'])
                     ->setCellValue('E' . ($key + 4), $data[$i]['establecimiento'])
-                    ->setCellValue('F' . ($key + 4), $data[$i]['cod_compras'])
-                    ->setCellValue('G' . ($key + 4), $data[$i]['cod_producto'])
-                    ->setCellValue('H' . ($key + 4), $data[$i]['producto'])
-                    ->setCellValue('I' . ($key + 4), $data[$i]['val_unitario'])
-                    ->setCellValue('J' . ($key + 4), $data[$i]['cantidad'])
-                    ->setCellValue('K' . ($key + 4), $data[$i]['total'])
-                    ->setCellValue('L' . ($key + 4), $data[$i]['stand'])
-                    ->setCellValue('M' . ($key + 4), "");
+                    ->setCellValue('F' . ($key + 4), $data[$i]['municipio'])
+                    ->setCellValue('G' . ($key + 4), $data[$i]['cod_compras'])
+                    ->setCellValue('H' . ($key + 4), $data[$i]['cod_producto'])
+                    ->setCellValue('I' . ($key + 4), $data[$i]['producto'])
+                    ->setCellValue('J' . ($key + 4), $data[$i]['val_unitario'])
+                    ->setCellValue('K' . ($key + 4), $data[$i]['cantidad'])
+                    ->setCellValue('L' . ($key + 4), $data[$i]['total'])
+                    ->setCellValue('M' . ($key + 4), $data[$i]['stand'])
+                    ->setCellValue('N' . ($key + 4), "");
             
                 $key += 1;
             }else if($documento ==  $data[$i]['documento']){
@@ -69,42 +71,44 @@ class ReporteExcel extends Database {
                 
                 $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValue('A' . ($key + 4), $data[$i]['fecha_compra'])
-                    ->setCellValue('B' . ($key + 4), $data[$i]['numero_factura'])
+                    ->setCellValue('B' . ($key + 4), "No. ".$data[$i]['numero_factura'])
                     ->setCellValue('C' . ($key + 4), $data[$i]['documento'])
                     ->setCellValue('D' . ($key + 4), $data[$i]['nombre_cliente'])
                     ->setCellValue('E' . ($key + 4), $data[$i]['establecimiento'])
-                    ->setCellValue('F' . ($key + 4), $data[$i]['cod_compras'])
-                    ->setCellValue('G' . ($key + 4), $data[$i]['cod_producto'])
-                    ->setCellValue('H' . ($key + 4), $data[$i]['producto'])
-                    ->setCellValue('I' . ($key + 4), $data[$i]['val_unitario'])
-                    ->setCellValue('J' . ($key + 4), $data[$i]['cantidad'])
-                    ->setCellValue('K' . ($key + 4), $data[$i]['total'])
-                    ->setCellValue('L' . ($key + 4), $data[$i]['stand'])
-                    ->setCellValue('M' . ($key + 4), "");
+                    ->setCellValue('F' . ($key + 4), $data[$i]['municipio'])
+                    ->setCellValue('G' . ($key + 4), $data[$i]['cod_compras'])
+                    ->setCellValue('H' . ($key + 4), $data[$i]['cod_producto'])
+                    ->setCellValue('I' . ($key + 4), $data[$i]['producto'])
+                    ->setCellValue('J' . ($key + 4), $data[$i]['val_unitario'])
+                    ->setCellValue('K' . ($key + 4), $data[$i]['cantidad'])
+                    ->setCellValue('L' . ($key + 4), $data[$i]['total'])
+                    ->setCellValue('M' . ($key + 4), $data[$i]['stand'])
+                    ->setCellValue('N' . ($key + 4), "");
             
                 $key += 1;
             }else{
                 $total_todas_ventas += $total_compras_cliente;
                 $objPHPExcel->setActiveSheetIndex(0)                    
-                    ->setCellValue('M' . ($key + 4 - 1), $total_compras_cliente);
+                    ->setCellValue('N' . ($key + 4 - 1), $total_compras_cliente);
                 
                 $documento = $data[$i]['documento'];
                 $total_compras_cliente = $data[$i]['total'];
                 
                 $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValue('A' . ($key + 4), $data[$i]['fecha_compra'])
-                    ->setCellValue('B' . ($key + 4), $data[$i]['numero_factura'])
+                    ->setCellValue('B' . ($key + 4), "No. ".$data[$i]['numero_factura'])
                     ->setCellValue('C' . ($key + 4), $data[$i]['documento'])
                     ->setCellValue('D' . ($key + 4), $data[$i]['nombre_cliente'])
                     ->setCellValue('E' . ($key + 4), $data[$i]['establecimiento'])
-                    ->setCellValue('F' . ($key + 4), $data[$i]['cod_compras'])
-                    ->setCellValue('G' . ($key + 4), $data[$i]['cod_producto'])
-                    ->setCellValue('H' . ($key + 4), $data[$i]['producto'])
-                    ->setCellValue('I' . ($key + 4), $data[$i]['val_unitario'])
-                    ->setCellValue('J' . ($key + 4), $data[$i]['cantidad'])
-                    ->setCellValue('K' . ($key + 4), $data[$i]['total'])
-                    ->setCellValue('L' . ($key + 4), $data[$i]['stand'])
-                    ->setCellValue('M' . ($key + 4), "");
+                    ->setCellValue('F' . ($key + 4), $data[$i]['municipio'])
+                    ->setCellValue('G' . ($key + 4), $data[$i]['cod_compras'])
+                    ->setCellValue('H' . ($key + 4), $data[$i]['cod_producto'])
+                    ->setCellValue('I' . ($key + 4), $data[$i]['producto'])
+                    ->setCellValue('J' . ($key + 4), $data[$i]['val_unitario'])
+                    ->setCellValue('K' . ($key + 4), $data[$i]['cantidad'])
+                    ->setCellValue('L' . ($key + 4), $data[$i]['total'])
+                    ->setCellValue('M' . ($key + 4), $data[$i]['stand'])
+                    ->setCellValue('N' . ($key + 4), "");
                 
                 $key += 1;
             }            
@@ -112,12 +116,12 @@ class ReporteExcel extends Database {
         
         $total_todas_ventas += $total_compras_cliente;
         $objPHPExcel->setActiveSheetIndex(0)                    
-                    ->setCellValue('M' . ($key + 4 - 1), $total_compras_cliente);        
+                    ->setCellValue('N' . ($key + 4 - 1), $total_compras_cliente);        
 
         $cellSum = $key + 4;
 
         $objPHPExcel->setActiveSheetIndex(0)
-                ->setCellValue('M' . ($cellSum), $total_todas_ventas);
+                ->setCellValue('N' . ($cellSum), $total_todas_ventas);
 
 
 //============================================
@@ -125,9 +129,9 @@ class ReporteExcel extends Database {
 //============================================
         $objPHPExcel->setActiveSheetIndex(0);
 
-        $objPHPExcel->getActiveSheet()->mergeCells('A1:M1');
-        $objPHPExcel->getActiveSheet()->mergeCells('A' . $cellSum . ':L' . $cellSum);
-        $objPHPExcel->getActiveSheet()->getStyle('A3:M3')->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:N1');
+        $objPHPExcel->getActiveSheet()->mergeCells('A' . $cellSum . ':M' . $cellSum);
+        $objPHPExcel->getActiveSheet()->getStyle('A3:N3')->getFont()->setBold(true);
 
         $objPHPExcel->getActiveSheet()->getColumnDimension("A")->setAutoSize(true);
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
@@ -142,6 +146,7 @@ class ReporteExcel extends Database {
         $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
         $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setAutoSize(true);
         $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setAutoSize(true);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setAutoSize(true);
         
         
         /*
@@ -228,17 +233,17 @@ class ReporteExcel extends Database {
 
 
 
-        $objPHPExcel->getActiveSheet()->getStyle('A1:M1')->applyFromArray($estiloTitulo);
-        $objPHPExcel->getActiveSheet()->getStyle('A3:M' . $objPHPExcel
+        $objPHPExcel->getActiveSheet()->getStyle('A1:N1')->applyFromArray($estiloTitulo);
+        $objPHPExcel->getActiveSheet()->getStyle('A3:N' . $objPHPExcel
                         ->getActiveSheet()
                         ->getHighestRow())
                 ->applyFromArray($brdStyle);
-        $objPHPExcel->getActiveSheet()->getStyle('A4:M' . $objPHPExcel
+        $objPHPExcel->getActiveSheet()->getStyle('A4:N' . $objPHPExcel
                         ->getActiveSheet()
                         ->getHighestRow())
                 ->applyFromArray($estiloInformacion);
-        $objPHPExcel->getActiveSheet()->getStyle('M' . ($cellSum))->applyFromArray($estiloTotal);
-        $objPHPExcel->getActiveSheet()->getStyle('A' . $cellSum . ':L' . $cellSum)->applyFromArray($estiloEndLine);
+        $objPHPExcel->getActiveSheet()->getStyle('N' . ($cellSum))->applyFromArray($estiloTotal);
+        $objPHPExcel->getActiveSheet()->getStyle('A' . $cellSum . ':M' . $cellSum)->applyFromArray($estiloEndLine);
 
 
         header('Content-Type: application/vnd.ms-excel');

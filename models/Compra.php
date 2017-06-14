@@ -26,4 +26,20 @@ class Compra extends Database{
         return $this->response;
     }
     
+    function consultar_municipio_cliente($codigo_cliente){
+        $sql = "SELECT * FROM subcodigos WHERE BINARY codigo = ?";
+        $args = array($codigo_cliente);
+        $result = $this->set($sql, $args);
+        if($this->getRow_count() > 0){            
+            $this->response['correcto'] = TRUE;
+            $this->response['data'] = $result;
+            $this->response['msg'] = "";
+        }else{
+            $this->response['correcto'] = FALSE;
+            $this->response['data'] = NULL;
+            $this->response['msg'] = "No hay municipios";
+        }
+        return $this->response;
+    }
+    
 }

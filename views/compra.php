@@ -68,6 +68,12 @@ date_default_timezone_set('America/Bogota');
                                     <input type="text" class="form-control input-sm" name="cupo_disp" id="cupo_disp" disabled="true">
                                 </div>
                             </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="municipio">Municipio</label>
+                                    <select class="form-control input-sm" name="municipio" id="municipio"></select>
+                                </div>
+                            </div>
                         </form>
                     </div>
 
@@ -253,6 +259,12 @@ date_default_timezone_set('America/Bogota');
                     <button data-role="add" data-id="<%= item.id_producto %>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span></button>
                 </td>
             </tr>
+            <% }); %>
+        </script> 
+        
+        <script type="text/template" id="temp_municipios">
+            <% _.each(datos, function(item){ %>             
+                <option value="<%= item.subcodigo %>"><%= item.municipio %></option>                
             <% }); %>
         </script>       
         

@@ -15,11 +15,18 @@ function consultar_datos_cliente(cod_cliente) {
         }
     }).success(function (response) {
         $("#tarjeta").attr("disabled", false);
+        //console.log(response);
         response = JSON.parse(response);
-        console.log(JSON.stringify(response['data']));
         if (response['correcto']) {
             row_cliente = response['data'];
+            var municipios = response['datos_municipio'];            
             autocompletar_cliente(row_cliente);
+            //TODO agregar el municipio a los datos del cliente cuando se haga la facturacion
+            if(typeof municipios !== 'undefined'){
+                autocompletar_municipios(municipios);
+            }else{
+                autocompletar_municipios([{'subcodigo': "UNICO", 'municipio': "UNICO"}]);
+            }
         } else {
             alerta_error(response['msg']);
         }
@@ -35,6 +42,12 @@ function autocompletar_cliente(data) {
     $('#cupo_ini').val(accounting.formatMoney(data['cupo_inicial'])).attr('disabled', true);
     $('#cupo_disp').val(accounting.formatMoney(data['cupo_disponible'])).attr('disabled', true);
     $('#cod_oferta').focus();
+}
+
+
+function autocompletar_municipios(data){
+    var temp = _.template($("#temp_municipios").html());
+    $("#municipio").html(temp({datos: data}));
 }
 
 
@@ -386,6 +399,7 @@ $('#btn_add_product').on('click', function () {
 
 $('#btn_registrar_compra').on('click', function(){
     validar_cliente();
+    row_cliente.municipio = $("#municipio").val();
     registrar_compra_cliente();
 });
 

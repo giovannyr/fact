@@ -17,11 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
              * errores y validar si el cupo alcanza para hacer la compra
              */
             $documento = $request->data->cliente->cod_cliente;
+            $municipio = $request->data->cliente->municipio;
             $detalles = $request->data->compra;
             $total_compra = calcular_total_compra($detalles);
             $cupo_disp = floatval($request->data->cliente->cupo_disponible) - $total_compra;
             $fac = new Factura();
-            $fac->set_data($documento, $detalles, $cupo_disp);
+            $fac->set_data($documento, $municipio, $detalles, $cupo_disp);
             $fac->guardar();
 
             #echo ($documento);
