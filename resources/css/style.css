@@ -1,3 +1,52 @@
 .page-header{
     margin-top: 20px;
 }
+
+
+
+/*============ informes ============*/
+.panel-primary  > .panel-heading .btn{
+    color: #337ab7;
+    font-weight: 600;
+}
+.panel-primary > .panel-footer{
+    color: #337ab7;
+}
+
+.panel-green{
+    border-color: #5cb85c;			
+}
+.panel-green > .panel-heading{
+    border-color: #5cb85c;
+    color: #FFF;
+    background-color: #5cb85c;
+}
+.panel-green > .panel-heading .btn{
+    color: #5cb85c;	
+    font-weight: 600;
+}
+.panel-green > .panel-footer{
+    color: #5cb85c;
+}				
+.fa-5x{
+    font-size: 5em;
+}
+
+.panel-orange{
+    border-color: #E57F25;			
+}
+.panel-orange > .panel-heading{
+    border-color: #E57F25;
+    color: #FFF;
+    background-color: #E57F25;
+}
+.panel-orange > .panel-heading .btn{
+    color: #E57F25;	
+    font-weight: 600;
+}
+.panel-orange > .panel-footer{
+    color: #E57F25;
+}				
+.fa-5x{
+    font-size: 5em;
+}

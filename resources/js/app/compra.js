@@ -39,8 +39,8 @@ function autocompletar_cliente(data) {
     $('#nombre_cliente').val(data['nombre']).attr('disabled', true);
     $('#razon_cliente').val(data['razon_social']).attr('disabled', true);
     $('#cod_vendedor').val(data['cod_vendedor']).attr('disabled', true);
-    $('#cupo_ini').val(accounting.formatMoney(data['cupo_inicial'])).attr('disabled', true);
-    $('#cupo_disp').val(accounting.formatMoney(data['cupo_disponible'])).attr('disabled', true);
+//    $('#cupo_ini').val(accounting.formatMoney(data['cupo_inicial'])).attr('disabled', true);
+//    $('#cupo_disp').val(accounting.formatMoney(data['cupo_disponible'])).attr('disabled', true);
     $('#cod_oferta').focus();
 }
 
@@ -56,8 +56,8 @@ function borrar_datos_cliente() {
     $('#nombre_cliente').val('').attr('disabled', true);
     $('#razon_cliente').val('').attr('disabled', true);
     $('#cod_vendedor').val('').attr('disabled', true);
-    $('#cupo_ini').val('').attr('disabled', true);
-    $('#cupo_disp').val('').attr('disabled', true);
+//    $('#cupo_ini').val('').attr('disabled', true);
+//    $('#cupo_disp').val('').attr('disabled', true);
 }
 
 

@@ -37,12 +37,12 @@ class Factura extends Database{
         if($this->factura_valida){ // si se inserto la factura
             if(!empty($this->id_fact)){ // si el id no es vacio
                 $this->guardar_detalles($this->id_fact, $this->detalles);
-                if($this->detalles_validos){    
-                    $this->actualizar_cupo($this->cupo_disponible, $this->documento);                
-                    $this->response;
-                }else{
-                    $this->response;
-                }
+//                if($this->detalles_validos){    
+//                    $this->actualizar_cupo($this->cupo_disponible, $this->documento);                
+//                    $this->response;
+//                }else{
+//                    $this->response;
+//                }
             }else{
                 $this->response;
             }

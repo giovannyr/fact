@@ -5,35 +5,7 @@
         <meta charset="UTF-8">
         <title></title>
         <?php require_once 'enlaces.php'; ?>
-        <link rel="stylesheet" href="../resources/menu/css/simple-sidebar.css"/>
-        <style>
-		.panel-primary  > .panel-heading .btn{
-			color: #337ab7;
-			font-weight: 600;
-		}
-		.panel-primary > .panel-footer{
-			color: #337ab7;
-		}
-		
-		.panel-green{
-			border-color: #5cb85c;			
-		}
-		.panel-green > .panel-heading{
-			border-color: #5cb85c;
-			color: #FFF;
-			background-color: #5cb85c;
-		}
-		.panel-green > .panel-heading .btn{
-			color: #5cb85c;	
-			font-weight: 600;
-		}
-		.panel-green > .panel-footer{
-			color: #5cb85c;
-		}				
-		.fa-5x{
-			font-size: 5em;
-		}
-	</style>
+        <link rel="stylesheet" href="../resources/menu/css/simple-sidebar.css"/>        
     </head>
     <body>
         <?php require './others/alert.php'; ?>
@@ -45,12 +17,110 @@
 
                     <div class="row">
                         <div class="col lg-12">
-                            <h1 class="page-header">Informe de Compras</h1>
+                            <h1 class="page-header">Informes</h1>
                         </div>
                     </div>                   
-
-
-                    <div class="row">
+                    
+                    <div class="row">                        
+                        <div class="col-lg-3 col-md-3">
+                            <form action="../controllers/ctrl_reporte_detallado.php" method="POSt">
+                                <div class="panel panel-green">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa fa-file-excel-o fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <button type="submit" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
+                                                Descargar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Informe Detallado</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </form>
+			</div>
+                                           
+                        <div class="col-lg-3 col-md-3">
+                            <form action="" method="POSt">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa fa-file-excel-o fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <button type="submit" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
+                                                Descargar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Informe Mayor Comprador</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </form>
+			</div>
+                        
+                        <div class="col-lg-3 col-md-3">
+                            <form action="" method="POSt">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa fa-file-excel-o fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <button type="submit" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
+                                                Descargar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Informe ...</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </form>
+			</div>
+                        
+                        <div class="col-lg-3 col-md-3">
+                            <form action="" method="POSt">
+                                <div class="panel panel-orange">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <i class="fa fa-file-excel-o fa-5x"></i>
+                                            </div>
+                                            <div class="col-xs-9 text-right">
+                                                <button type="submit" class="btn btn-default">
+                                                <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
+                                                Descargar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Informe ...</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </form>
+			</div>
+                    </div>
+                    
+                    
+                    <div class="row" style="display: none;">
                         <div class="col-lg-12 col-md-12">
                             <div class="table-responsive" style="height: 350px; overflow-y: auto">
                                 <table class="table table-striped table-condensed table-bordered">
@@ -76,33 +146,6 @@
                             </div>
                         </div>
                     </div> 
-                    
-                    <div class="row">
-                        <br />
-                        <div class="col-lg-3 col-md-3">
-                            <form action="../controllers/ctrl_reporte_excel.php" method="POSt">
-                                <div class="panel panel-green">
-                                    <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="col-xs-3">
-                                                <i class="fa fa-file-excel-o fa-5x"></i>
-                                            </div>
-                                            <div class="col-xs-9 text-right">
-                                                <button type="submit" class="btn btn-default">
-                                                <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
-                                                Descargar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel-footer">
-                                        <span class="pull-left">Informe en Excel</span>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </form>
-			</div>
-                    </div>
 
                 </div>
             </div>

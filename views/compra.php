@@ -56,7 +56,7 @@ date_default_timezone_set('America/Bogota');
                                     <input type="text" class="form-control input-sm" name="cod_vendedor" id="cod_vendedor" disabled="true">
                                 </div>
                             </div>
-                            <div class="col-lg-3">
+<!--                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="cupo_ini">Cupo Inicial</label>
                                     <input type="text" class="form-control input-sm" name="cupo_ini" id="cupo_ini" disabled="true">
@@ -67,7 +67,7 @@ date_default_timezone_set('America/Bogota');
                                     <label for="cupo_disp">Cupo Disponible</label>
                                     <input type="text" class="form-control input-sm" name="cupo_disp" id="cupo_disp" disabled="true">
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="municipio">Municipio</label>

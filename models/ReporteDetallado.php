@@ -1,10 +1,8 @@
 <?php
 require_once '../db/Database.php';
-ini_set('max_execution_time', 300);
-ini_set('memory_limit', '-1');
 require_once '../resources/excel/PHPExcel.php';
 
-class ReporteExcel extends Database {
+class ReporteDetallado extends Database {
 
     public function generar_excel() {
         $objPHPExcel = new PHPExcel();
